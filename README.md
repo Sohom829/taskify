@@ -20,3 +20,7 @@ Good-modern looking TODO Application to manage your task.
 - Delete todo
 - Save todo as JSON
 - Import todo
+
+## Site
+
+Coming Soon...
