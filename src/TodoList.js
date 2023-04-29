@@ -75,7 +75,6 @@ function TodoList({ todos, addTodo, deleteTodo }) {
   };
 
   const handleSave = () => {
-    // update the todo with the new title and description
     const newTodo = { ...editingTodo, title, description };
     const newTodos = todos.map((todo) =>
       todo.id === editingTodo.id ? newTodo : todo
@@ -202,6 +201,7 @@ function TodoList({ todos, addTodo, deleteTodo }) {
           ))}
         </div>
       )}
+      <p>Note: You need to refresh the page for seeing the edited todo.</p>
     </div>
   );
 }
