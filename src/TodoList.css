@@ -1,0 +1,118 @@
+.title-input {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 5px;
+  outline-color: black;
+}
+.desc-input {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 16px;
+  outline-color: black;
+}
+
+.submit-btn {
+  background-color: rgb(0, 153, 255);
+  color: white;
+  padding: 15px 64px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 5px;
+  border-radius: 1rem;
+  border-color: transparent;
+  transition: 0.5s;
+}
+.submit-btn:hover {
+  background-color: rgb(9, 125, 202);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.save-btn {
+  background-color: rgb(0, 218, 62);
+  color: white;
+  padding: 15px 64px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 1cm;
+  border-radius: 3rem;
+  border-color: transparent;
+  transition: 0.5s;
+  margin-right: 5px;
+}
+
+.save-btn:hover {
+  background-color: rgb(6, 177, 55);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.import-btn {
+  background-color: transparent;
+  color: white;
+  padding: 15px 64px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 3cm;
+  border-radius: 1rem;
+  border-color: transparent;
+  transition: 0.5s;
+  margin-right: 5px;
+  color: black;
+}
+
+.import-btn:hover {
+  background-color: rgba(0, 0, 0, 0.095);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: transparent;
+  color: black;
+  fill: black;
+  text-align: center;
+  outline: transparent;
+  border-color: transparent;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0.5rem;
+  margin-left: 3px;
+  transition: 0.5s;
+}
+
+.delete-btn:hover {
+  fill: black;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: rgba(0, 0, 0, 0.095);
+}
+
+@media screen and (max-width: 441px) {
+  .title-input {
+    margin-right: 0px;
+  }
+  .desc-input {
+    margin-right: 0px;
+  }
+  .submit-btn {
+    margin-top: 5px;
+  }
+}
+
+@media screen and (max-width: 395px) {
+  .import-btn {
+    margin-top: 5px;
+  }
+}
