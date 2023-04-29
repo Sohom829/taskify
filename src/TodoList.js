@@ -31,9 +31,27 @@ function TodoList({ todos, addTodo, deleteTodo }) {
     reader.onload = (event) => {
       const importedTodos = JSON.parse(event.target.result);
       const existingTodos = JSON.parse(localStorage.getItem("todos")) || [];
-      const newTodos = [...existingTodos, ...importedTodos];
-      setImportedTodos(newTodos);
-      localStorage.setItem("todos", JSON.stringify(newTodos));
+      const newTodos = [...existingTodos];
+      let addedNewTodo = false;
+      for (let i = 0; i < importedTodos.length; i++) {
+        const newTodo = importedTodos[i];
+        const isExisting = existingTodos.some(
+          (todo) =>
+            todo.id === newTodo.id &&
+            todo.title === newTodo.title &&
+            todo.description === newTodo.description
+        );
+        if (!isExisting) {
+          newTodos.push(newTodo);
+          addedNewTodo = true;
+        }
+      }
+      if (addedNewTodo) {
+        setImportedTodos(importedTodos);
+        localStorage.setItem("todos", JSON.stringify(newTodos));
+      } else {
+        alert("Already have all the same todos.");
+      }
     };
     reader.readAsText(file);
   };
@@ -70,13 +88,20 @@ function TodoList({ todos, addTodo, deleteTodo }) {
         </button>
       </form>
       <ul>
+        <h1>Todo list</h1>
+
         {todos.map((todo) => (
-          <li key={todo.id}>
-            {todo.title} - {todo.description}
-            <button className="delete-btn" onClick={() => deleteTodo(todo.id)}>
-              {<FontAwesomeIcon icon={faTrash} />}
-            </button>
-          </li>
+          <div>
+            <li key={todo.id}>
+              {todo.title} - {todo.description}
+              <button
+                className="delete-btn"
+                onClick={() => deleteTodo(todo.id)}
+              >
+                {<FontAwesomeIcon icon={faTrash} />}
+              </button>
+            </li>
+          </div>
         ))}
       </ul>
       <button className="save-btn" onClick={saveTodos}>
