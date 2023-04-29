@@ -2,6 +2,7 @@ import {
   faAdd,
   faDownload,
   faFileImport,
+  faListCheck,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -88,21 +89,29 @@ function TodoList({ todos, addTodo, deleteTodo }) {
         </button>
       </form>
       <ul>
-        <h1>Todo list</h1>
-
-        {todos.map((todo) => (
-          <div>
-            <li key={todo.id}>
-              {todo.title} - {todo.description}
-              <button
-                className="delete-btn"
-                onClick={() => deleteTodo(todo.id)}
-              >
-                {<FontAwesomeIcon icon={faTrash} />}
-              </button>
-            </li>
+        <h1>{<FontAwesomeIcon icon={faListCheck} />} Todo list</h1>
+        {todos.length > 0 ? (
+          todos.map((todo) => (
+            <div>
+              <li key={todo.id}>
+                {todo.title} - {todo.description}
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteTodo(todo.id)}
+                >
+                  {<FontAwesomeIcon icon={faTrash} />}
+                </button>
+              </li>
+            </div>
+          ))
+        ) : (
+          <div className="n-todo">
+            Yaaas queen, your <strong>to-do</strong> list is empty! Time to put
+            your feet up, grab some wine, and celebrate this magical moment. Or,
+            you know, you could always start a dance party in your living room.
+            Just saying.
           </div>
-        ))}
+        )}
       </ul>
       <button className="save-btn" onClick={saveTodos}>
         {<FontAwesomeIcon icon={faDownload} />} Save
