@@ -1,6 +1,8 @@
 import {
   faAdd,
+  faCancel,
   faDownload,
+  faEdit,
   faFileImport,
   faListCheck,
   faTrash,
@@ -14,6 +16,7 @@ function TodoList({ todos, addTodo, deleteTodo }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [importedTodos, setImportedTodos] = useState([]);
+  const [editingTodo, setEditingTodo] = useState(null);
   const fileInput = useRef(null);
 
   const saveTodos = () => {
@@ -65,6 +68,30 @@ function TodoList({ todos, addTodo, deleteTodo }) {
     setDescription("");
   };
 
+  const handleEdit = (todo) => {
+    setEditingTodo(todo);
+    setTitle(todo.title);
+    setDescription(todo.description);
+  };
+
+  const handleSave = () => {
+    // update the todo with the new title and description
+    const newTodo = { ...editingTodo, title, description };
+    const newTodos = todos.map((todo) =>
+      todo.id === editingTodo.id ? newTodo : todo
+    );
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+    setEditingTodo(null);
+    setTitle("");
+    setDescription("");
+  };
+
+  const handleCancel = () => {
+    setEditingTodo(null);
+    setTitle("");
+    setDescription("");
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -92,16 +119,53 @@ function TodoList({ todos, addTodo, deleteTodo }) {
         <h1>{<FontAwesomeIcon icon={faListCheck} />} Todo list</h1>
         {todos.length > 0 ? (
           todos.map((todo) => (
-            <div>
-              <li key={todo.id}>
-                {todo.title} - {todo.description}
-                <button
-                  className="delete-btn"
-                  onClick={() => deleteTodo(todo.id)}
-                >
-                  {<FontAwesomeIcon icon={faTrash} />}
-                </button>
-              </li>
+            <div key={todo.id}>
+              {editingTodo && editingTodo.id === todo.id ? (
+                <li>
+                  <input
+                    className="title-input"
+                    type="text"
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <input
+                    className="desc-input"
+                    type="text"
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                  <button className="save-edit-btn" onClick={handleSave}>
+                    {<FontAwesomeIcon icon={faEdit} />}
+                  </button>
+                  <button className="cancel-edit-btn" onClick={handleCancel}>
+                    {<FontAwesomeIcon icon={faCancel} />}
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <div className="todo-info">
+                    <div className="todo-title">
+                      {todo.title} - {todo.description}
+                    </div>
+                    <div className="btn">
+                      <button
+                        className="edit-btn"
+                        onClick={() => handleEdit(todo)}
+                      >
+                        {<FontAwesomeIcon icon={faEdit} />}
+                      </button>
+                      <button
+                        className="delete-btn"
+                        onClick={() => deleteTodo(todo.id)}
+                      >
+                        {<FontAwesomeIcon icon={faTrash} />}
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              )}
             </div>
           ))
         ) : (
@@ -126,13 +190,17 @@ function TodoList({ todos, addTodo, deleteTodo }) {
         {<FontAwesomeIcon icon={faFileImport} />} Import
       </button>
       {importedTodos.length > 0 && (
-        <ul>
+        <div className="imported-todos">
+          <h3>Imported Todos:</h3>
           {importedTodos.map((todo) => (
-            <li key={todo.id}>
-              {todo.title} - {todo.description}
-            </li>
+            <div key={todo.id}>
+              <div className="todo-info">
+                <div className="todo-title">{todo.title}</div>
+                <div className="todo-desc">{todo.description}</div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

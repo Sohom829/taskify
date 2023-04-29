@@ -99,6 +99,34 @@
   background-color: rgba(0, 0, 0, 0.095);
 }
 
+.todo-title,
+.btn {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 3px;
+}
+
+.edit-btn {
+  background-color: transparent;
+  color: black;
+  fill: black;
+  text-align: center;
+  outline: transparent;
+  border-color: transparent;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0.5rem;
+  margin-left: 3px;
+  transition: 0.5s;
+}
+
+.edit-btn:hover {
+  fill: black;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: rgba(0, 0, 0, 0.095);
+}
+
 .n-todo {
   font-style: italic;
 }
